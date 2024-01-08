@@ -1,0 +1,25 @@
+## Interface: 100200
+## Title: RaidFadeEvenMore
+## Version: 1.0.0
+## Author: Ajax
+## Notes: Fades raid frames when out of range, even more
+## OptionalDeps: Ace3, LibStub, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets
+## IconTexture: Interface\AddOns\RaidFadeEvenMore\logo.tga
+## DefaultState: Enabled
+## SavedVariables: RaidFadeEvenMoreDB
+## X-Category: Battlegrounds/PvP
+## X-Credits: Ajax
+## X-License: All Rights Reserved
+## X-Website: https://www.curseforge.com/wow/addons/raidfadeevenmore
+## X-Curse-Project-ID: 959848
+## X-Wago-ID: XKq9y8Ky
+## X-WoWI-ID: 26677
+
+#@no-lib-strip@
+embeds.xml
+#@end-no-lib-strip@
+
+config.lua
+interface.lua
+RaidFadeEvenMore.lua
+options.lua
