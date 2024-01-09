@@ -1,6 +1,6 @@
 ## Interface: 100200
 ## Title: RaidFadeEvenMore
-## Version: 1.0.0
+## Version: 1.0.1
 ## Author: Ajax
 ## Notes: Fades raid frames when out of range, even more
 ## OptionalDeps: Ace3, LibStub, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets

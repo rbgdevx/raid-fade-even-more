@@ -22,6 +22,8 @@
     "OpacitySliderFrame",
     "ChatFontNormal",
     "OKAY",
-    "NOT_BOUND"
+    "NOT_BOUND",
+    "SlashCmdList",
+    "hash_SlashCmdList"
   ]
 }
