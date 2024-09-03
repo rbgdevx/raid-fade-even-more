@@ -1,7 +1,7 @@
-## Interface: 100200
+## Interface: 110002
 ## Title: RaidFadeEvenMore
-## Version: 1.0.1
-## Author: Ajax
+## Version: 1.0.2
+## Author: RBGDEV
 ## Notes: Fades raid frames when out of range, even more
 ## OptionalDeps: Ace3, LibStub, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets
 ## IconTexture: Interface\AddOns\RaidFadeEvenMore\logo.tga
@@ -20,6 +20,7 @@ embeds.xml
 #@end-no-lib-strip@
 
 config.lua
+helpers.lua
 interface.lua
 RaidFadeEvenMore.lua
 options.lua

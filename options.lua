@@ -2,8 +2,14 @@ local AddonName, NS = ...
 
 local LibStub = LibStub
 local CopyTable = CopyTable
+local next = next
 
-local RaidFadeEvenMore = LibStub("AceAddon-3.0"):GetAddon(AddonName)
+---@type RaidFadeEvenMore
+local RaidFadeEvenMore = NS.RaidFadeEvenMore
+local RaidFadeEvenMoreFrame = NS.RaidFadeEvenMore.frame
+
+local Options = {}
+NS.Options = Options
 
 NS.AceConfig = {
   name = AddonName,
@@ -14,13 +20,13 @@ NS.AceConfig = {
       desc = "This makes the entire raid frames see-through essentially",
       type = "toggle",
       width = "double",
-      order = 0,
+      order = 1,
       set = function(_, val)
-        RaidFadeEvenMore.db.global.background = val
+        NS.db.global.background = val
         NS.Interface:RefreshFrames()
       end,
       get = function(_)
-        return RaidFadeEvenMore.db.global.background
+        return NS.db.global.background
       end,
     },
     alpha = {
@@ -31,31 +37,76 @@ NS.AceConfig = {
       min = 0,
       max = 1,
       step = 0.01,
-      order = 1,
+      order = 2,
       set = function(_, val)
-        RaidFadeEvenMore.db.global.alpha = val
+        NS.db.global.alpha = val
         NS.Interface:RefreshFrames()
       end,
       get = function(_)
-        return RaidFadeEvenMore.db.global.alpha
+        return NS.db.global.alpha
       end,
     },
-    spacing1 = { type = "description", order = 2, name = " " },
+    spacing1 = { type = "description", order = 3, name = " " },
+    debug = {
+      name = "Toggle debug mode",
+      desc = "Turning this feature on prints debug messages to the chat window.",
+      type = "toggle",
+      width = "full",
+      order = 99,
+      set = function(_, val)
+        NS.db.global.debug = val
+      end,
+      get = function(_)
+        return NS.db.global.debug
+      end,
+    },
     reset = {
-      name = "Reset",
+      name = "Reset Everything",
       type = "execute",
-      width = "half",
-      order = 3,
+      width = "normal",
+      order = 100,
       func = function()
         RaidFadeEvenMoreDB = CopyTable(NS.DefaultDatabase)
-        RaidFadeEvenMore.db = RaidFadeEvenMoreDB
+        NS.db = RaidFadeEvenMoreDB
         NS.Interface:RefreshFrames()
       end,
     },
   },
 }
 
-function RaidFadeEvenMore:SetupOptions()
+function Options:SlashCommands(_)
+  LibStub("AceConfigDialog-3.0"):Open(AddonName)
+end
+
+function Options:Setup()
   LibStub("AceConfig-3.0"):RegisterOptionsTable(AddonName, NS.AceConfig)
   LibStub("AceConfigDialog-3.0"):AddToBlizOptions(AddonName, AddonName)
+
+  SLASH_RFEM1 = AddonName
+  SLASH_RFEM2 = "/rfem"
+
+  function SlashCmdList.RFEM(message)
+    self:SlashCommands(message)
+  end
 end
+
+function RaidFadeEvenMore:ADDON_LOADED(addon)
+  if addon == AddonName then
+    RaidFadeEvenMoreFrame:UnregisterEvent("ADDON_LOADED")
+
+    RaidFadeEvenMoreDB = RaidFadeEvenMoreDB and next(RaidFadeEvenMoreDB) ~= nil and RaidFadeEvenMoreDB or {}
+
+    -- Copy any settings from default if they don't exist in current profile
+    NS.CopyDefaults(NS.DefaultDatabase, RaidFadeEvenMoreDB)
+
+    -- Reference to active db profile
+    -- Always use this directly or reference will be invalid
+    NS.db = RaidFadeEvenMoreDB
+
+    -- Remove table values no longer found in default settings
+    NS.CleanupDB(RaidFadeEvenMoreDB, NS.DefaultDatabase)
+
+    Options:Setup()
+  end
+end
+RaidFadeEvenMoreFrame:RegisterEvent("ADDON_LOADED")

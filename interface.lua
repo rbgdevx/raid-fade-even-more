@@ -20,6 +20,10 @@ function Interface:RefreshFrames()
     local frame = _G["CompactRaidFrame" .. i]
     if frame and frame.displayedUnit then
       CompactUnitFrame_UpdateInRange(frame)
+
+      if NS.db.global.background == false then
+        frame.background:SetAlpha(1)
+      end
     end
   end
 end
@@ -39,17 +43,14 @@ function Interface:Initialize()
     local inRange, checkedRange = UnitInRange(frame.displayedUnit)
 
     if checkedRange and not inRange then
-      frame:SetAlpha(RaidFadeEvenMore.db.global.alpha)
+      frame:SetAlpha(NS.db.global.alpha)
 
-      if RaidFadeEvenMore.db.global.background then
-        frame.background:SetAlpha(RaidFadeEvenMore.db.global.alpha)
+      if NS.db.global.background then
+        frame.background:SetAlpha(NS.db.global.alpha)
       end
     else
       frame:SetAlpha(1)
-
-      if RaidFadeEvenMore.db.global.background then
-        frame.background:SetAlpha(1)
-      end
+      frame.background:SetAlpha(1)
     end
   end)
 end

@@ -1,26 +1,17 @@
-local AddonName, NS = ...
+local _, NS = ...
+
+---@type RaidFadeEvenMore
+local RaidFadeEvenMore = NS.RaidFadeEvenMore
+local RaidFadeEvenMoreFrame = NS.RaidFadeEvenMore.frame
 
 local Interface = NS.Interface
-
-local LibStub = LibStub
-
-RaidFadeEvenMore = LibStub("AceAddon-3.0"):NewAddon(AddonName, "AceEvent-3.0", "AceConsole-3.0")
 
 function RaidFadeEvenMore:PLAYER_ENTERING_WORLD()
   Interface:Initialize()
 end
 
-function RaidFadeEvenMore:SlashCommands(_)
-  LibStub("AceConfigDialog-3.0"):Open(AddonName)
+function RaidFadeEvenMore:PLAYER_LOGIN()
+  RaidFadeEvenMoreFrame:UnregisterEvent("PLAYER_LOGIN")
+  RaidFadeEvenMoreFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 end
-
-function RaidFadeEvenMore:OnInitialize()
-  self.db = LibStub("AceDB-3.0"):New(AddonName .. "DB", NS.DefaultDatabase, true)
-  self:SetupOptions()
-  self:RegisterChatCommand(AddonName, "SlashCommands")
-  self:RegisterChatCommand("rfem", "SlashCommands")
-end
-
-function RaidFadeEvenMore:OnEnable()
-  self:RegisterEvent("PLAYER_ENTERING_WORLD")
-end
+RaidFadeEvenMoreFrame:RegisterEvent("PLAYER_LOGIN")
