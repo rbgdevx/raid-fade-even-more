@@ -1,6 +1,6 @@
-## Interface: 110002
+## Interface: 110005
 ## Title: RaidFadeEvenMore
-## Version: 1.0.2
+## Version: 1.0.3
 ## Author: RBGDEV
 ## Notes: Fades raid frames when out of range, even more
 ## OptionalDeps: Ace3, LibStub, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets
@@ -8,9 +8,8 @@
 ## DefaultState: Enabled
 ## SavedVariables: RaidFadeEvenMoreDB
 ## X-Category: Battlegrounds/PvP
-## X-Credits: Ajax
 ## X-License: All Rights Reserved
-## X-Website: https://www.curseforge.com/wow/addons/raidfadeevenmore
+## X-Website: https://www.curseforge.com/wow/addons/raid-fade-even-more
 ## X-Curse-Project-ID: 959848
 ## X-Wago-ID: XKq9y8Ky
 ## X-WoWI-ID: 26677
