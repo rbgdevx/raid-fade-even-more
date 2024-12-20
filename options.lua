@@ -4,6 +4,9 @@ local LibStub = LibStub
 local CopyTable = CopyTable
 local next = next
 
+local AceConfig = LibStub("AceConfig-3.0")
+local AceConfigDialog = LibStub("AceConfigDialog-3.0")
+
 ---@type RaidFadeEvenMore
 local RaidFadeEvenMore = NS.RaidFadeEvenMore
 local RaidFadeEvenMoreFrame = NS.RaidFadeEvenMore.frame
@@ -75,12 +78,12 @@ NS.AceConfig = {
 }
 
 function Options:SlashCommands(_)
-  LibStub("AceConfigDialog-3.0"):Open(AddonName)
+  AceConfigDialog:Open(AddonName)
 end
 
 function Options:Setup()
-  LibStub("AceConfig-3.0"):RegisterOptionsTable(AddonName, NS.AceConfig)
-  LibStub("AceConfigDialog-3.0"):AddToBlizOptions(AddonName, AddonName)
+  AceConfig:RegisterOptionsTable(AddonName, NS.AceConfig)
+  AceConfigDialog:AddToBlizOptions(AddonName, AddonName)
 
   SLASH_RFEM1 = AddonName
   SLASH_RFEM2 = "/rfem"
