@@ -1,9 +1,9 @@
-## Interface: 110005
+## Interface: 110007
 ## Title: RaidFadeEvenMore
-## Version: 1.0.3
+## Version: 1.0.4
 ## Author: RBGDEV
 ## Notes: Fades raid frames when out of range, even more
-## OptionalDeps: Ace3, LibStub, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets
+## OptionalDeps: AceConfig-3.0, AceGUI-3.0, AceGUI-3.0-SharedMediaWidgets, CallbackHandler-1.0, LibSharedMedia-3.0, LibStub
 ## IconTexture: Interface\AddOns\RaidFadeEvenMore\logo.tga
 ## DefaultState: Enabled
 ## SavedVariables: RaidFadeEvenMoreDB

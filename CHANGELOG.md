@@ -1,5 +1,9 @@
 # Raid Fade Even More
 
+## [v1.0.4](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.0.4) (2024-12-20)
+
+- Update toc
+
 ## [v1.0.3](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.0.3) (2024-10-27)
 
 - Update toc
