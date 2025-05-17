@@ -1,5 +1,10 @@
 # Raid Fade Even More
 
+## [v1.0.6](https://github.com/rbgdevx/flat-raid-frames/releases/tag/v1.0.6) (2025-05-17)
+
+- Assigning addon to my own category for organization
+- Update toc
+
 ## [v1.0.5](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.0.5) (2025-04-02)
 
 - Update toc
