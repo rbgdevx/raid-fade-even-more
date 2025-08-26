@@ -1,5 +1,9 @@
 # Raid Fade Even More
 
+## [v1.0.7](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.0.7) (2025-08-26)
+
+- Update toc
+
 ## [v1.0.6](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.0.6) (2025-05-17)
 
 - Assigning addon to my own category for organization
