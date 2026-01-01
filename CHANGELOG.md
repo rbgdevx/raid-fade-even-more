@@ -1,5 +1,12 @@
 # Raid Fade Even More
 
+## [v1.1.0](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.1.0) (2026-01-01)
+
+- Removing all libs and simplifying the addon to leverage wow api settings instead
+- Rewriting the out of range detection to use built in frame properties and checks instead of detecting range per unit
+- Ensuring this works for midnight by working properly with the secret values for setting alpha values
+- General cleanup
+
 ## [v1.0.7](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.0.7) (2025-08-26)
 
 - Update toc

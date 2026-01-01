@@ -1,11 +1,6 @@
 local AddonName, NS = ...
 
-local LibStub = LibStub
-local CopyTable = CopyTable
 local next = next
-
-local AceConfig = LibStub("AceConfig-3.0")
-local AceConfigDialog = LibStub("AceConfigDialog-3.0")
 
 ---@type RaidFadeEvenMore
 local RaidFadeEvenMore = NS.RaidFadeEvenMore
@@ -14,78 +9,70 @@ local RaidFadeEvenMoreFrame = NS.RaidFadeEvenMore.frame
 local Options = {}
 NS.Options = Options
 
-NS.AceConfig = {
-  name = AddonName,
-  type = "group",
-  args = {
-    background = {
-      name = "Also Lower Background Texture Opacity",
-      desc = "This makes the entire raid frames see-through essentially",
-      type = "toggle",
-      width = "double",
-      order = 1,
-      set = function(_, val)
-        NS.db.global.background = val
-        NS.Interface:RefreshFrames()
-      end,
-      get = function(_)
-        return NS.db.global.background
-      end,
-    },
-    alpha = {
-      name = "Alpha",
-      desc = "Sets the out of range alpha value",
-      type = "range",
-      width = "double",
-      min = 0,
-      max = 1,
-      step = 0.01,
-      order = 2,
-      set = function(_, val)
-        NS.db.global.alpha = val
-        NS.Interface:RefreshFrames()
-      end,
-      get = function(_)
-        return NS.db.global.alpha
-      end,
-    },
-    spacing1 = { type = "description", order = 3, name = " " },
-    debug = {
-      name = "Toggle debug mode",
-      desc = "Turning this feature on prints debug messages to the chat window.",
-      type = "toggle",
-      width = "full",
-      order = 99,
-      set = function(_, val)
-        NS.db.global.debug = val
-      end,
-      get = function(_)
-        return NS.db.global.debug
-      end,
-    },
-    reset = {
-      name = "Reset Everything",
-      type = "execute",
-      width = "normal",
-      order = 100,
-      func = function()
-        RaidFadeEvenMoreDB = CopyTable(NS.DefaultDatabase)
-        NS.db = RaidFadeEvenMoreDB
-        NS.Interface:RefreshFrames()
-      end,
-    },
-  },
-}
-
 function Options:SlashCommands(_)
-  AceConfigDialog:Open(AddonName)
+  Settings.OpenToCategory(NS.settingsCategory:GetID())
+end
+
+local function OnSettingChanged(_setting, _value)
+  local _key = _setting:GetVariable()
+  RaidFadeEvenMoreDB[_key] = _value
+
+  NS.Interface:RefreshFrames()
 end
 
 function Options:Setup()
-  AceConfig:RegisterOptionsTable(AddonName, NS.AceConfig)
-  AceConfigDialog:AddToBlizOptions(AddonName, AddonName)
+  local category = Settings.RegisterVerticalLayoutCategory("Raid Fade Even More")
+  Settings.RegisterAddOnCategory(category)
+  NS.settingsCategory = category
 
-  SLASH_RFEM1 = AddonName
+  do
+    local key = "alpha"
+    local defaultValue = NS.DefaultDatabase[key]
+    local min = 0.1
+    local max = 1.0
+    local step = 0.1
+
+    local setting = Settings.RegisterAddOnSetting(
+      category,
+      "alpha",
+      key,
+      RaidFadeEvenMoreDB,
+      Settings.VarType.Number,
+      "Alpha",
+      defaultValue
+    )
+    setting:SetValueChangedCallback(OnSettingChanged)
+
+    local tooltip = "Sets the in/out of range alpha value"
+    local options = Settings.CreateSliderOptions(min, max, step)
+    -- options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right)
+    options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right, function(value)
+      return string.format("%.2f", value)
+    end)
+    Settings.CreateSlider(category, setting, options, tooltip)
+  end
+
+  do
+    local key = "background"
+    local defaultValue = NS.DefaultDatabase[key]
+
+    -- categoryTbl, variable, variableKey, variableTbl, variableType, name, defaultValue
+    local setting = Settings.RegisterAddOnSetting(
+      category,
+      "background",
+      key,
+      RaidFadeEvenMoreDB,
+      "boolean",
+      "Include Background Alpha",
+      defaultValue
+    )
+    setting:SetValueChangedCallback(OnSettingChanged)
+
+    local tooltip = "Also lowers the background alpha"
+    Settings.CreateCheckbox(category, setting, tooltip)
+  end
+
+  SLASH_RFEM1 = "/raidfadeevenmore"
   SLASH_RFEM2 = "/rfem"
 
   function SlashCmdList.RFEM(message)

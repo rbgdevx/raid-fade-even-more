@@ -2,13 +2,9 @@ local _, NS = ...
 
 local CreateFrame = CreateFrame
 
----@class GlobalTable : table
+---@class DBTable : table
 ---@field alpha number
 ---@field background boolean
----@field debug boolean
-
----@class DBTable : table
----@field global GlobalTable
 
 ---@class RaidFadeEvenMore
 ---@field ADDON_LOADED function
@@ -32,9 +28,6 @@ end)
 NS.RaidFadeEvenMore.frame = RaidFadeEvenMoreFrame
 
 NS.DefaultDatabase = {
-  global = {
-    alpha = 0.2,
-    background = false,
-    debug = false,
-  },
+  alpha = 0.2,
+  background = false,
 }
