@@ -1,6 +1,6 @@
-## Interface: 120001, 120000, 110207
+## Interface: 120001, 120000
 ## Title: Raid Fade Even More
-## Version: 1.1.0
+## Version: 1.1.1
 ## Author: RBGDEV
 ## Notes: Fades raid frames when out of range, even more
 ## IconTexture: Interface/AddOns/RaidFadeEvenMore/logo.tga

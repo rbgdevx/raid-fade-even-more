@@ -1,5 +1,9 @@
 # Raid Fade Even More
 
+## [v1.1.1](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.1.1) (2026-02-15)
+
+- Updating alpha increments to be 0.05 instead of 0.1
+
 ## [v1.1.0](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.1.0) (2026-01-01)
 
 - Removing all libs and simplifying the addon to leverage wow api settings instead

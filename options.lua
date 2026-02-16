@@ -28,9 +28,9 @@ function Options:Setup()
   do
     local key = "alpha"
     local defaultValue = NS.DefaultDatabase[key]
-    local min = 0.1
+    local min = 0.05
     local max = 1.0
-    local step = 0.1
+    local step = 0.05
 
     local setting = Settings.RegisterAddOnSetting(
       category,

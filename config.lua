@@ -28,6 +28,6 @@ end)
 NS.RaidFadeEvenMore.frame = RaidFadeEvenMoreFrame
 
 NS.DefaultDatabase = {
-  alpha = 0.2,
+  alpha = 0.35,
   background = false,
 }
