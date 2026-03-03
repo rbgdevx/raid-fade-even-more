@@ -7,6 +7,8 @@ local GetNumGroupMembers = GetNumGroupMembers
 local strsub = strsub
 local hooksecurefunc = hooksecurefunc
 
+local initialized = false
+
 local function getDesiredAlpha()
   local db = NS and NS.db and NS.db
   return (db and db.alpha) or 0.3
@@ -87,6 +89,23 @@ function Interface:RefreshFrames()
 end
 
 function Interface:Initialize()
+  if initialized then
+    return
+  end
+  initialized = true
+
+  -- Hook the central function where Blizzard calls frame:SetAlpha().
+  -- Cannot override CompactUnitFrame_GetRangeAlpha because replacing a global
+  -- taints the execution context, and boolean tests on secret values (outOfRange)
+  -- error in tainted code. hooksecurefunc is safe — it runs after the original.
+  -- This catches ALL code paths: UNIT_PHASE, UNIT_FLAGS, INCOMING_RESURRECT_CHANGED,
+  -- UNIT_OTHER_PARTY_CHANGED, INCOMING_SUMMON_CHANGED, UpdateDistance, etc.
+  if CompactUnitFrame_UpdateCenterStatusIcon then
+    hooksecurefunc("CompactUnitFrame_UpdateCenterStatusIcon", function(frame)
+      remapAlpha(frame)
+    end)
+  end
+
   -- Run AFTER Blizzard updates alpha, then remap it to our desired value.
   hooksecurefunc("CompactUnitFrame_UpdateInRange", function(frame)
     if not frame or not frame.optionTable or not frame.optionTable.fadeOutOfRange then
@@ -95,7 +114,7 @@ function Interface:Initialize()
     remapAlpha(frame)
   end)
 
-  -- (Optional) also react to general "update all" if you want:
+  -- Also react to general "update all":
   if CompactUnitFrame_UpdateAll then
     hooksecurefunc("CompactUnitFrame_UpdateAll", remapAlpha)
   end

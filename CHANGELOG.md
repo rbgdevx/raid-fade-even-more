@@ -1,5 +1,9 @@
 # Raid Fade Even More
 
+## [v1.1.2](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.1.2) (2026-03-02)
+
+- Handling alpha changes for when a group members are in different phases
+
 ## [v1.1.1](https://github.com/rbgdevx/raid-fade-even-more/releases/tag/v1.1.1) (2026-02-15)
 
 - Updating alpha increments to be 0.05 instead of 0.1
